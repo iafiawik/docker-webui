@@ -34,6 +34,8 @@ func main() {
 func index(cfg *config.Config) http.Handler {
 	return misc.Chain(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != cfg.PathPrefix+"/" {
+			logs.Info.Printf("NO MATCH, URL.Path %v", r.URL.Path)
+			logs.Info.Printf("NO MATCH, PathPrefix %v", cfg.PathPrefix)
 			http.NotFound(w, r)
 			return
 		}
